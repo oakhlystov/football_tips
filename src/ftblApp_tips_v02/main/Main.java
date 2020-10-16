@@ -3,7 +3,8 @@ package ftblApp_tips_v02.main;
 import javax.swing.*;
 import java.awt.*;
 
-public class Main {
+public class Main
+{
     public static void main(String[] args)
     {
         JFrame frame = new JFrame("aw hello");
