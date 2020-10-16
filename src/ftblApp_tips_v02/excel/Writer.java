@@ -7,19 +7,20 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
 public class Writer
 {
-    static void writeToExcel() throws Exception
+    public static void writeToExcel(String text1, String text2, String text3) throws Exception
     {
         //Create blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         //Create a blank sheet
-        XSSFSheet spreadsheet = workbook.createSheet( "");
+        XSSFSheet spreadsheet = workbook.createSheet( "Writesheet");
 
         //Create row object
         XSSFRow row;
@@ -27,7 +28,7 @@ public class Writer
         //This data needs to be written (Object[])
         Map< String, Object[] > empinfo = new TreeMap< String, Object[] >();
         empinfo.put( "1", new Object[] {
-                "EMP ID", "EMP NAME", "DESIGNATION" });
+                text1, text2, text3 });
 
         empinfo.put( "2", new Object[] {
                 "tp01", "Gopal", "Technical Manager" });
@@ -62,7 +63,7 @@ public class Writer
         //String filename = "Writesheet.xlsx";
         //Write the workbook in file system
         FileOutputStream out = new FileOutputStream(
-                new File("C:/ftbl/JAVA/Writesheet.xlsx"));
+                new File("C:/ftbl/test/Writesheet.xlsx"));
 
         workbook.write(out);
         out.close();
