@@ -14,7 +14,7 @@ public class UserInterface extends JFrame
     {
         super(s);
 
-
+        
 
         pack();
     }
