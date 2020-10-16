@@ -1,6 +1,7 @@
 package ftblApp_tips_v02.main;
 
 import ftblApp_tips_v02.excel.Writer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -8,10 +9,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UserInterface extends JPanel
-{
-    public static void main(String[] args)
-    {
+public class UserInterface extends JPanel {
+    public static void main(String[] args) {
         new UserInterface();
     }
 
@@ -19,14 +18,13 @@ public class UserInterface extends JPanel
     JTextField txtf_date, txtf_admin, txtf_champ, txtf_federation;
     JLabel lbl_date, lbl_admin, lbl_champ, lbl_federation;
 
-    public UserInterface()
-    {
+    public UserInterface() {
         Listener handler = new Listener();
         JFrame mainFrame = new JFrame("football tips");
         mainFrame.setResizable(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLayout(new GridLayout(20,5));
-        mainFrame.setSize(1000,1000);
+        mainFrame.setLayout(new GridLayout(20, 5));
+        mainFrame.setSize(1000, 1000);
         mainFrame.setVisible(true);
         mainFrame.setLocationRelativeTo(null);
 
@@ -72,17 +70,15 @@ public class UserInterface extends JPanel
     public class Listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try {
-                if (e.getSource() == btn_saveNewInfo)
-                {
+                if (e.getSource() == btn_saveNewInfo) {
 
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
                     String requiredDate = df.format(new Date());
-                    Writer.writeToExcel(txtf_date.getText(), txtf_date.getText()+"2", txtf_date.getText()+"3", requiredDate);
-                    JOptionPane.showMessageDialog(null,"button 1 pressed");
+                    Writer.writeToExcel(txtf_date.getText(), txtf_date.getText() + "2", txtf_date.getText() + "3", requiredDate);
+                    JOptionPane.showMessageDialog(null, "button 1 pressed");
                     System.out.println("DEBUG | button 1 pressed");
                 }
-                if (e.getSource() == btn_exit)
-                {
+                if (e.getSource() == btn_exit) {
                     /* Тестовые данные для проверки работы нажатия по кнопке*/
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
                     String requiredDate = df.format(new Date());
@@ -90,8 +86,8 @@ public class UserInterface extends JPanel
                     /* Конец тестовых данных */
                 }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null,e.getActionCommand()+"\nError");
-                System.out.println("Error in try/catch in ActionListener => ActionPerformed: \n"+System.err);
+                JOptionPane.showMessageDialog(null, e.getActionCommand() + "\nError");
+                System.out.println("Error in try/catch in ActionListener => ActionPerformed: \n" + System.err);
             }
 
         }
