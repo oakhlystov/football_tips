@@ -1,5 +1,6 @@
 package ftblApp_tips_v02.excel;
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -14,19 +15,19 @@ import java.util.TreeMap;
 
 public class Writer
 {
-    public static void writeToExcel(String text1, String text2, String text3) throws Exception
+    public static void writeToExcel(String text1, String text2, String text3, String requiredDate) throws Exception
     {
         //Create blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         //Create a blank sheet
-        XSSFSheet spreadsheet = workbook.createSheet( "Writesheet");
+        XSSFSheet spreadsheet = workbook.createSheet( "Report");
 
         //Create row object
         XSSFRow row;
 
         //This data needs to be written (Object[])
-        Map< String, Object[] > empinfo = new TreeMap< String, Object[] >();
+        Map< String, Object[] > empinfo = new TreeMap<>();
         empinfo.put( "1", new Object[] {
                 text1, text2, text3 });
 
@@ -62,8 +63,10 @@ public class Writer
 
         //String filename = "Writesheet.xlsx";
         //Write the workbook in file system
+        String fileName = "Report "+requiredDate+".xlsx";
+        String filePath = "C:/ftbl/test/";
         FileOutputStream out = new FileOutputStream(
-                new File("C:/ftbl/test/Writesheet.xlsx"));
+                new File(filePath+fileName));
 
         workbook.write(out);
         out.close();
