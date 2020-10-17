@@ -13,7 +13,7 @@ public class DialogueWindows
     }
     public static boolean confirmExit ()
     {
-        int confirmValue = JOptionPane.showConfirmDialog(null, "Выйти из программы? Несохраненные изменения будут потеряны.", "Выход", JOptionPane.YES_NO_OPTION);
+        int confirmValue = JOptionPane.showConfirmDialog(null, Messages.textInfoConfirmExit, Messages.textFrameConfirmExit, JOptionPane.YES_NO_OPTION);
         return confirmValue == 0;
     }
 }
