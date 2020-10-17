@@ -2,15 +2,20 @@ package ftblApp_tips_v02.excel;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.*;
+
+import javax.swing.*;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
 public class Writer
 {
-    public static void writeToExcel(String text1, String text2, String text3, String requiredDate) throws Exception
+    public static void writeToExcel(String text1, String text2, String text3) throws Exception
     {
         //Create blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -58,6 +63,8 @@ public class Writer
 
         //String filename = "Writesheet.xlsx";
         //Write the workbook in file system
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        String requiredDate = df.format(new Date());
         String fileName = "Report "+requiredDate+".xlsx";
         String filePath = "C:/ftbl/test/";
         FileOutputStream out = new FileOutputStream(
@@ -65,6 +72,6 @@ public class Writer
 
         workbook.write(out);
         out.close();
-        System.out.println("Writesheet.xlsx written successfully");
+        JOptionPane.showMessageDialog(null,"Данные успешно записаны");
     }
 }

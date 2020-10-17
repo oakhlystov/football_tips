@@ -70,13 +70,24 @@ public class UserInterface extends JPanel {
     public class Listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try {
-                if (e.getSource() == btn_saveNewInfo) {
-
-                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-                    String requiredDate = df.format(new Date());
-                    Writer.writeToExcel(txtf_date.getText(), txtf_date.getText() + "2", txtf_date.getText() + "3", requiredDate);
+                if (e.getSource() == btn_saveNewInfo)
+                {
                     JOptionPane.showMessageDialog(null, "button 1 pressed");
                     System.out.println("DEBUG | button 1 pressed");
+                    /*
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+                    String requiredDate = df.format(new Date());
+                    */
+                    boolean confirm = DialogueWindows.confirm();
+                    if (confirm == true)
+                    {
+                        Writer.writeToExcel(txtf_date.getText(), txtf_federation.getText(), txtf_date.getText() + "3");
+                    } else
+                    {
+
+                    }
+
+
                 }
                 if (e.getSource() == btn_exit) {
                     /* Тестовые данные для проверки работы нажатия по кнопке*/
@@ -86,7 +97,7 @@ public class UserInterface extends JPanel {
                     /* Конец тестовых данных */
                 }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, e.getActionCommand() + "\nError");
+                JOptionPane.showMessageDialog(null, e.getActionCommand() + " ~~~ \nError");
                 System.out.println("Error in try/catch in ActionListener => ActionPerformed: \n" + System.err);
             }
 
