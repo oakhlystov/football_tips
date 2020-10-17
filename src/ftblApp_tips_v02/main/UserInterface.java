@@ -9,22 +9,25 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public  class UserInterface extends JPanel {
-    public static void main(String[] args) {
+public class UserInterface extends JPanel
+{
+    public static void main(String[] args)
+    {
         new UserInterface();
     }
 
     JButton btn_saveNewInfo, btn_validateFormInfo, btn_exit;
     JTextField txtf_date, txtf_admin, txtf_champ, txtf_federation;
-    JLabel lbl_date, lbl_admin, lbl_champ, lbl_federation, lbl_info_if_saving_cancelled;
+    JLabel lbl_date, lbl_federation, lbl_champ, lbl_admin, lbl_info_status, lbl_info_status_content;
 
-    public  UserInterface() {
+    public UserInterface()
+    {
         Listener handler = new Listener();
         JFrame mainFrame = new JFrame("football tips");
         mainFrame.setResizable(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLayout(new GridLayout(40, 1));
-        mainFrame.setSize(1000, 1000);
+        mainFrame.setLayout(new GridLayout(20, 1));
+        mainFrame.setSize(500, 500);
         mainFrame.setVisible(true);
         mainFrame.setLocationRelativeTo(null);
 
@@ -32,31 +35,38 @@ public  class UserInterface extends JPanel {
         lbl_date = new JLabel("Дата:",null,SwingConstants.LEFT);
         txtf_date = new JTextField("EmptyDate");
 
-
+        /* Federation */
         lbl_federation = new JLabel("Федерация:",null,SwingConstants.LEFT);
         txtf_federation = new JTextField("EmptyFederation");
 
+        /* Championship */
         lbl_champ = new JLabel("Чемпионат:",null,SwingConstants.LEFT);
         txtf_champ = new JTextField("EmptyChamp");
 
+        /* Administrator */
         lbl_admin = new JLabel("Администратор:",null,SwingConstants.LEFT);
         txtf_admin = new JTextField("EmptyAdmin");
 
-        lbl_info_if_saving_cancelled = new JLabel("",null,SwingConstants.CENTER);
+        lbl_info_status = new JLabel("",null,SwingConstants.LEFT);
         btn_saveNewInfo = new JButton("Сохранить как новую запись");
-        btn_validateFormInfo = new JButton("Проверить правильность данных");
-        btn_exit = new JButton("Выход?");
+        btn_validateFormInfo = new JButton("Проверить правильность данных"); // @TODO in work
+        btn_exit = new JButton("Выход");
+        lbl_info_status_content = new JLabel("",null,SwingConstants.LEFT);
 
         /* Заполнение формы элементами */
         mainFrame.add(lbl_date);
         mainFrame.add(txtf_date);
+        mainFrame.add(lbl_federation);
+        mainFrame.add(txtf_federation);
         mainFrame.add(lbl_champ);
         mainFrame.add(txtf_champ);
         mainFrame.add(lbl_admin);
         mainFrame.add(txtf_admin);
-        mainFrame.add(lbl_info_if_saving_cancelled);
+        mainFrame.add(btn_validateFormInfo);
         mainFrame.add(btn_saveNewInfo);
         mainFrame.add(btn_exit);
+        mainFrame.add(lbl_info_status); // @TODO поставить в самый низ
+        mainFrame.add(lbl_info_status_content); // @TODO поставить в самый низ
 
         /* ActionListener на кнопки */
         btn_saveNewInfo.addActionListener(handler);
@@ -70,9 +80,12 @@ public  class UserInterface extends JPanel {
 
     }
 
-    public class Listener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            try {
+    public class Listener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            try
+            {
                 if (e.getSource() == btn_saveNewInfo)
                 {
                     JOptionPane.showMessageDialog(null, "button 1 pressed");
@@ -87,18 +100,27 @@ public  class UserInterface extends JPanel {
                         Writer.writeToExcel(txtf_date.getText(), txtf_federation.getText(), txtf_date.getText() + "3");
                     } else
                     {
-                        lbl_info_if_saving_cancelled.setText("Вновь проверьте введенные данные!");
+                        lbl_info_status.setText("Вновь проверьте введенные данные!");
                     }
-
-
                 }
-                if (e.getSource() == btn_exit) {
+                if (e.getSource() == btn_validateFormInfo)
+                {
+                    JOptionPane.showMessageDialog(null,"validation button pressed. In work");
+                }
+                if (e.getSource() == btn_exit)
+                {
                     /* Тестовые данные для проверки работы нажатия по кнопке*/
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
                     String requiredDate = df.format(new Date());
                     JOptionPane.showMessageDialog(null, requiredDate);
                     /* Конец тестовых данных */
-                    System.exit(1);
+                    boolean confirm = DialogueWindows.confirmExit();
+                    if (confirm) {
+                        System.exit(1);
+                    } else
+                    {
+                        lbl_info_status.setText("Выход из программы отменен. Можете продолжить работу");
+                    }
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, e.getActionCommand() + " ~~~ \nError");
