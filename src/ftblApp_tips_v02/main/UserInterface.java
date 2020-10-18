@@ -6,9 +6,6 @@ import ftblApp_tips_v02.localization.Messages;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class UserInterface extends JFrame
 {
@@ -126,9 +123,7 @@ public class UserInterface extends JFrame
         }
         void closeMainFrame()
         {
-            dispose();
-            //System.exit(1);
+            System.exit(1);
         }
     }
-
 }
