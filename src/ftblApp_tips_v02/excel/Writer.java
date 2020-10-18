@@ -26,32 +26,30 @@ public class Writer
         XSSFRow row;
 
         //This data needs to be written (Object[])
-        Map< String, Object[] > empinfo = new TreeMap<>();
-        empinfo.put( "1", new Object[] {
+        Map< String, Object[] > newInfo = new TreeMap<>();
+        newInfo.put( "1", new Object[] {
                 "Дата", "Федерация", "Чемпионат", "Админ" });
 
-        empinfo.put( "2", new Object[] {
-                text1, text2, text3, text4 });
+        newInfo.put( "2", new Object[] {text1, text2, text3, text4});
 
-        empinfo.put( "3", new Object[] {
-                "tp02", "Manisha", "Proof Reader" });
+        newInfo.put( "3", new Object[] {"tp02", "Manisha", "Proof Reader"});
 
-        empinfo.put( "4", new Object[] {
+        newInfo.put( "4", new Object[] {
                 "tp03", "Masthan", "Technical Writer" });
 
-        empinfo.put( "5", new Object[] {
+        newInfo.put( "5", new Object[] {
                 "tp04", "Satish", "Technical Writer" });
 
-        empinfo.put( "6", new Object[] {
+        newInfo.put( "6", new Object[] {
                 "tp05", "Krishna", "Technical Writer" });
 
         //Iterate over data and write to sheet
-        Set< String > keyid = empinfo.keySet();
+        Set< String > keyid = newInfo.keySet();
         int rowid = 0;
 
         for (String key : keyid) {
             row = spreadsheet.createRow(rowid++);
-            Object [] objectArr = empinfo.get(key);
+            Object [] objectArr = newInfo.get(key);
             int cellid = 0;
 
             for (Object obj : objectArr){

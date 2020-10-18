@@ -1,6 +1,7 @@
 package ftblApp_tips_v02.main;
 
 import ftblApp_tips_v02.excel.Writer;
+import ftblApp_tips_v02.localization.Labels;
 import ftblApp_tips_v02.localization.Messages;
 
 import javax.swing.*;
@@ -16,8 +17,8 @@ public class UserInterface extends JFrame
     }
 
     JButton btn_saveNewInfo, btn_validateFormInfo, btn_exit;
-    JTextField txtf_date, txtf_admin, txtf_champ, txtf_federation;
-    JLabel lbl_date, lbl_federation, lbl_champ, lbl_admin, lbl_info_status, lbl_info_status_content;
+    JTextField txtf_date, txtf_admin, txtf_champ, txtf_federation, txtf_games;
+    JLabel lbl_date, lbl_federation, lbl_champ, lbl_admin, lbl_info_status, lbl_info_status_content, lbl_games;
 
     public UserInterface()
     {
@@ -47,6 +48,10 @@ public class UserInterface extends JFrame
         lbl_admin = new JLabel("Администратор:",null,SwingConstants.LEFT);
         txtf_admin = new JTextField("---");
 
+        /* Games */
+        lbl_games = new JLabel(Labels.textLabelGamesQntt,null,SwingConstants.LEFT);
+        txtf_games = new JTextField("---");
+
         /* Buttons */
         btn_saveNewInfo = new JButton("Сохранить как новую запись");
         btn_validateFormInfo = new JButton("Проверить правильность данных"); // @TODO in work
@@ -65,6 +70,8 @@ public class UserInterface extends JFrame
         mainFrame.add(txtf_champ);
         mainFrame.add(lbl_admin);
         mainFrame.add(txtf_admin);
+        mainFrame.add(lbl_games);
+        mainFrame.add(txtf_games);
         mainFrame.add(btn_validateFormInfo);
         mainFrame.add(btn_saveNewInfo);
         mainFrame.add(btn_exit);
