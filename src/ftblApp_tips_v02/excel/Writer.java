@@ -1,21 +1,20 @@
 package ftblApp_tips_v02.excel;
 
+import ftblApp_tips_v02.localization.Messages;
+import ftblApp_tips_v02.main.Maths;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.*;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
 public class Writer
 {
-    public static void writeToExcel(String text1, String text2, String text3) throws Exception
+    public static void writeToExcel(String text1, String text2, String text3, String text4) throws Exception
     {
         //Create blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -29,7 +28,7 @@ public class Writer
         //This data needs to be written (Object[])
         Map< String, Object[] > empinfo = new TreeMap<>();
         empinfo.put( "1", new Object[] {
-                text1, text2, text3 });
+                text1, text2, text3, text4 });
 
         empinfo.put( "2", new Object[] {
                 "tp01", "Gopal", "Technical Manager" });
@@ -61,17 +60,13 @@ public class Writer
             }
         }
 
-        //String filename = "Writesheet.xlsx";
         //Write the workbook in file system
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-        String requiredDate = df.format(new Date());
-        String fileName = "Report "+requiredDate+".xlsx";
         String filePath = "C:/ftbl/test/";
-        FileOutputStream out = new FileOutputStream(
-                new File(filePath+fileName));
+        String fileName = "Report "+ Maths.currentDateTime()+".xlsx";
+        FileOutputStream out = new FileOutputStream(new File(filePath+fileName));
 
         workbook.write(out);
         out.close();
-        JOptionPane.showMessageDialog(null,"Данные успешно записаны");
+        JOptionPane.showMessageDialog(null, Messages.textInfoConfirmSaveOk);
     }
 }

@@ -1,6 +1,7 @@
 package ftblApp_tips_v02.main;
 
 import ftblApp_tips_v02.excel.Writer;
+import ftblApp_tips_v02.localization.Messages;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,10 +10,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UserInterface extends JPanel
+public class UserInterface extends JFrame
 {
     public static void main(String[] args)
     {
+        /* Open (call) frame UserInterface */
         new UserInterface();
     }
 
@@ -22,6 +24,7 @@ public class UserInterface extends JPanel
 
     public UserInterface()
     {
+        /* Constructor */
         Listener handler = new Listener();
         JFrame mainFrame = new JFrame("football tips");
         mainFrame.setResizable(true);
@@ -33,24 +36,27 @@ public class UserInterface extends JPanel
 
         /* Элементы, которые будут отображаться на форме. Их далее нужно отдельно добавить на саму форму */
         lbl_date = new JLabel("Дата:",null,SwingConstants.LEFT);
-        txtf_date = new JTextField("EmptyDate");
+        txtf_date = new JTextField("---");
 
         /* Federation */
         lbl_federation = new JLabel("Федерация:",null,SwingConstants.LEFT);
-        txtf_federation = new JTextField("EmptyFederation");
+        txtf_federation = new JTextField("---");
 
         /* Championship */
         lbl_champ = new JLabel("Чемпионат:",null,SwingConstants.LEFT);
-        txtf_champ = new JTextField("EmptyChamp");
+        txtf_champ = new JTextField("---");
 
         /* Administrator */
         lbl_admin = new JLabel("Администратор:",null,SwingConstants.LEFT);
-        txtf_admin = new JTextField("EmptyAdmin");
+        txtf_admin = new JTextField("---");
 
-        lbl_info_status = new JLabel("",null,SwingConstants.LEFT);
+        /* Buttons */
         btn_saveNewInfo = new JButton("Сохранить как новую запись");
         btn_validateFormInfo = new JButton("Проверить правильность данных"); // @TODO in work
         btn_exit = new JButton("Выход");
+
+        /* Labels */
+        lbl_info_status = new JLabel("",null,SwingConstants.LEFT);
         lbl_info_status_content = new JLabel("",null,SwingConstants.LEFT);
 
         /* Заполнение формы элементами */
@@ -75,9 +81,8 @@ public class UserInterface extends JPanel
 
         /* Валидация всех элементов, которые должны быть на форме. По факту - позволяет отобразить все, что должно быть на форме */
         mainFrame.validate();
-        //mainFrame.pack(); //Собирает форму, в том числе подгоняет размер формы под содержимое (игнор mainFrame.setSize())
-
-
+        /*Собирает форму, в том числе подгоняет размер формы под содержимое (игнор mainFrame.setSize())*/
+        //mainFrame.pack();
     }
 
     public class Listener implements ActionListener
@@ -88,47 +93,42 @@ public class UserInterface extends JPanel
             {
                 if (e.getSource() == btn_saveNewInfo)
                 {
-                    JOptionPane.showMessageDialog(null, "button 1 pressed");
-                    System.out.println("DEBUG | button 1 pressed");
-                    /*
-                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-                    String requiredDate = df.format(new Date());
-                    */
                     boolean confirm = DialogueWindows.confirm();
                     if (confirm)
                     {
-                        Writer.writeToExcel(txtf_date.getText(), txtf_federation.getText(), txtf_date.getText() + "3");
+                        Writer.writeToExcel(txtf_date.getText(), txtf_federation.getText(), txtf_champ.getText(), txtf_admin.getText());
                     } else
                     {
-                        lbl_info_status.setText("Вновь проверьте введенные данные!");
+                        lbl_info_status.setText(Messages.textInfoConfirmSaveCancel);
                     }
                 }
                 if (e.getSource() == btn_validateFormInfo)
                 {
-                    JOptionPane.showMessageDialog(null,"validation button pressed. In work");
+                    JOptionPane.showMessageDialog(null,e.getActionCommand()+" button pressed. In work");
+                    System.out.println(e.getActionCommand()+" button pressed. In work");
                 }
                 if (e.getSource() == btn_exit)
                 {
-                    /* Тестовые данные для проверки работы нажатия по кнопке*/
-                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-                    String requiredDate = df.format(new Date());
-                    JOptionPane.showMessageDialog(null, requiredDate);
-                    /* Конец тестовых данных */
                     boolean confirm = DialogueWindows.confirmExit();
-                    if (confirm) {
-                        System.exit(1);
+                    if (confirm)
+                    {
+                        closeMainFrame();
+                        //System.exit(1);
                     } else
                     {
-                        lbl_info_status.setText("Выход из программы отменен. Можете продолжить работу");
+                        lbl_info_status.setText(Messages.textInfoConfirmExitCancel);
                     }
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, e.getActionCommand() + " ~~~ \nError");
                 System.out.println("Error in try/catch in ActionListener => ActionPerformed: \n" + System.err);
             }
-
+        }
+        void closeMainFrame()
+        {
+            dispose();
+            //System.exit(1);
         }
     }
 
 }
-
