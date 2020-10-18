@@ -28,10 +28,10 @@ public class Writer
         //This data needs to be written (Object[])
         Map< String, Object[] > empinfo = new TreeMap<>();
         empinfo.put( "1", new Object[] {
-                text1, text2, text3, text4 });
+                "Дата", "Федерация", "Чемпионат", "Админ" });
 
         empinfo.put( "2", new Object[] {
-                "tp01", "Gopal", "Technical Manager" });
+                text1, text2, text3, text4 });
 
         empinfo.put( "3", new Object[] {
                 "tp02", "Manisha", "Proof Reader" });
