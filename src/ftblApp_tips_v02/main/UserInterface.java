@@ -44,7 +44,7 @@ public class UserInterface extends JFrame
         mainFrame.setResizable(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLayout(new GridLayout(18, 1));
-        mainFrame.setSize(300, 500);
+        mainFrame.setSize(400, 500);
         mainFrame.setVisible(true);
         mainFrame.setLocationRelativeTo(null);
 

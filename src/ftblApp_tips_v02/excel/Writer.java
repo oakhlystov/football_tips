@@ -107,6 +107,6 @@ public class Writer
 
         workbook.write(out);
         out.close();
-        JOptionPane.showMessageDialog(null, Messages.textInfoConfirmSaveOk+"\nGUID операции: "+guid);
+        JOptionPane.showMessageDialog(null, Messages.textInfoConfirmSaveOk+guid);
     }
 }
