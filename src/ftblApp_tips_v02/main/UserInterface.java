@@ -101,9 +101,7 @@ public class UserInterface extends JFrame
                     boolean confirm = DialogueWindows.confirm();
                     if (confirm)
                     {
-                        UUID uuid = UUID.randomUUID();
-                        String guid = uuid.toString();
-                        Writer.writeToExcel(txtf_date.getText(), txtf_federation.getText(), txtf_champ.getText(), txtf_admin.getText(), guid);
+                        Writer.writeToExcel(txtf_date.getText(), txtf_federation.getText(), txtf_champ.getText(), txtf_admin.getText());
                     } else
                     {
                         lbl_info_status.setText(Messages.textInfoConfirmSaveCancel);
