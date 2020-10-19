@@ -7,6 +7,7 @@ import ftblApp_tips_v02.localization.Messages;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.UUID;
 
 public class UserInterface extends JFrame
 {
@@ -100,7 +101,9 @@ public class UserInterface extends JFrame
                     boolean confirm = DialogueWindows.confirm();
                     if (confirm)
                     {
-                        Writer.writeToExcel(txtf_date.getText(), txtf_federation.getText(), txtf_champ.getText(), txtf_admin.getText());
+                        UUID uuid = UUID.randomUUID();
+                        String guid = uuid.toString();
+                        Writer.writeToExcel(txtf_date.getText(), txtf_federation.getText(), txtf_champ.getText(), txtf_admin.getText(), guid);
                     } else
                     {
                         lbl_info_status.setText(Messages.textInfoConfirmSaveCancel);

@@ -14,7 +14,7 @@ import java.util.TreeMap;
 
 public class Writer
 {
-    public static void writeToExcel(String text1, String text2, String text3, String text4) throws Exception
+    public static void writeToExcel(String text1, String text2, String text3, String text4, String guid) throws Exception
     {
         //Create blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -27,20 +27,26 @@ public class Writer
 
         //This data needs to be written (Object[])
         Map< String, Object[] > newInfo = new TreeMap<>();
+
         newInfo.put( "1", new Object[] {
+                "Идентификатор записи:", guid });
+
+        newInfo.put( "2", new Object[] {
                 "Дата", "Федерация", "Чемпионат", "Админ" });
 
-        newInfo.put( "2", new Object[] {text1, text2, text3, text4});
-
-        newInfo.put( "3", new Object[] {"tp02", "Manisha", "Proof Reader"});
+        newInfo.put( "3", new Object[] {
+                text1, text2, text3, text4 });
 
         newInfo.put( "4", new Object[] {
-                "tp03", "Masthan", "Technical Writer" });
+                "tp02", "Manisha", "Proof Reader" });
 
         newInfo.put( "5", new Object[] {
-                "tp04", "Satish", "Technical Writer" });
+                "tp03", "Masthan", "Technical Writer" });
 
         newInfo.put( "6", new Object[] {
+                "tp04", "Satish", "Technical Writer" });
+
+        newInfo.put( "7", new Object[] {
                 "tp05", "Krishna", "Technical Writer" });
 
         //Iterate over data and write to sheet
