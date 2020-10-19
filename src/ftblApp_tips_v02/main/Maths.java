@@ -10,14 +10,24 @@ public class Maths
     public static String currentDateTime()
     {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-        String requiredDate;
-        return requiredDate = df.format(new Date());
+        return df.format(new Date());
+    }
+
+    public static String currentDate()
+    {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(new Date());
     }
 
     public static String createGuid()
     {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
+    }
+
+    public static void privet()
+    {
+
     }
 
 }

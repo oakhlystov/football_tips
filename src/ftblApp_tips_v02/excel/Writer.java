@@ -11,47 +11,79 @@ import java.io.FileOutputStream;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.UUID;
 
 public class Writer
 {
-    public static void writeToExcel(String text1, String text2, String text3, String text4) throws Exception
+    public static void writeToExcel(String txtf_date_toWrite,
+                                    String guid,
+                                    String txtf_federation_toWrite,
+                                    String txtf_champ_toWrite,
+                                    String txtf_admin_toWrite,
+                                    String txtf_games_toWrite,
+                                    String txtf_division_toWrite)
+            throws Exception
     {
         //Create blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         //Create a blank sheet
-        XSSFSheet spreadsheet = workbook.createSheet( "Report");
+        XSSFSheet spreadsheet = workbook.createSheet( ""+Maths.currentDateTime());
 
         //Create row object
         XSSFRow row;
 
         //This data needs to be written (Object[])
         Map< String, Object[] > newInfo = new TreeMap<>();
-
+        //String guid = Maths.createGuid();
         newInfo.put( "1", new Object[] {
-                "Идентификатор записи:", Maths.createGuid() });
+                "Идентификатор записи:",
+                null,
+                null,
+                null,
+                guid });
 
         newInfo.put( "2", new Object[] {
-                "Дата и время создания отчета:", Maths.currentDateTime() });
+                "Дата и время создания отчета:",
+                null,
+                null,
+                null,
+                Maths.currentDateTime() });
 
         newInfo.put( "3", new Object[] {
-                "Дата", "Федерация", "Чемпионат", "Админ" });
+                null,
+                "Дата",
+                null,
+                "Федерация",
+                null,
+                "Чемпионат",
+                null,
+                "Дивизион",
+                null,
+                "Игры",
+                null,
+                "Админ",
+                null, });
 
         newInfo.put( "4", new Object[] {
-                text1, text2, text3, text4 });
+                null,
+                txtf_date_toWrite,
+                null,
+                txtf_federation_toWrite,
+                null,
+                txtf_champ_toWrite,
+                null,
+                txtf_division_toWrite,
+                null,
+                txtf_games_toWrite,
+                null,
+                txtf_admin_toWrite,
+                null});
 
         newInfo.put( "5", new Object[] {
-                "tp02", "Manisha", "Proof Reader" });
-
-        newInfo.put( "6", new Object[] {
-                "tp03", "Masthan", "Technical Writer" });
-
-        newInfo.put( "7", new Object[] {
-                "tp04", "Satish", "Technical Writer" });
-
-        newInfo.put( "8", new Object[] {
-                "tp05", "Krishna", "Technical Writer" });
+                null,
+                "test1 2 3 444 0,5%%",
+                null,
+                "hellow"});
 
         //Iterate over data and write to sheet
         Set< String > keyid = newInfo.keySet();
@@ -75,6 +107,6 @@ public class Writer
 
         workbook.write(out);
         out.close();
-        JOptionPane.showMessageDialog(null, Messages.textInfoConfirmSaveOk);
+        JOptionPane.showMessageDialog(null, Messages.textInfoConfirmSaveOk+"\nGUID операции: "+guid);
     }
 }

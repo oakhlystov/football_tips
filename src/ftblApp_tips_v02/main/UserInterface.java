@@ -7,7 +7,6 @@ import ftblApp_tips_v02.localization.Messages;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.UUID;
 
 public class UserInterface extends JFrame
 {
@@ -17,9 +16,23 @@ public class UserInterface extends JFrame
         new UserInterface();
     }
 
-    JButton btn_saveNewInfo, btn_validateFormInfo, btn_exit;
-    JTextField txtf_date, txtf_admin, txtf_champ, txtf_federation, txtf_games;
-    JLabel lbl_date, lbl_federation, lbl_champ, lbl_admin, lbl_info_status, lbl_info_status_content, lbl_games;
+    JButton btn_validateFormInfo,
+            btn_saveNewInfo,
+            btn_exit;
+    JTextField  txtf_date,
+            txtf_admin,
+            txtf_champ,
+            txtf_federation,
+            txtf_games,
+            txtf_division;
+    JLabel  lbl_date,
+            lbl_federation,
+            lbl_champ,
+            lbl_admin,
+            lbl_info_status,
+            lbl_info_status_content,
+            lbl_games,
+            lbl_division;
 
     public UserInterface()
     {
@@ -28,30 +41,35 @@ public class UserInterface extends JFrame
         JFrame mainFrame = new JFrame("football tips");
         mainFrame.setResizable(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLayout(new GridLayout(20, 1));
-        mainFrame.setSize(500, 500);
+        mainFrame.setLayout(new GridLayout(18, 1));
+        mainFrame.setSize(300, 500);
         mainFrame.setVisible(true);
         mainFrame.setLocationRelativeTo(null);
 
         /* Элементы, которые будут отображаться на форме. Их далее нужно отдельно добавить на саму форму */
+        /* Games date */
         lbl_date = new JLabel("Дата:",null,SwingConstants.LEFT);
-        txtf_date = new JTextField("---");
+        txtf_date = new JTextField(Maths.currentDate());
 
         /* Federation */
         lbl_federation = new JLabel("Федерация:",null,SwingConstants.LEFT);
-        txtf_federation = new JTextField("---");
+        txtf_federation = new JTextField("AFL 8x8");
 
         /* Championship */
         lbl_champ = new JLabel("Чемпионат:",null,SwingConstants.LEFT);
-        txtf_champ = new JTextField("---");
+        txtf_champ = new JTextField("ИнтерЛига");
+
+        /* Division */
+        lbl_division = new JLabel("Дивизион:",null,SwingConstants.LEFT);
+        txtf_division = new JTextField("Дивизион 1");
 
         /* Administrator */
         lbl_admin = new JLabel("Администратор:",null,SwingConstants.LEFT);
-        txtf_admin = new JTextField("---");
+        txtf_admin = new JTextField("Фамилия Имя и Отчетство администратора");
 
-        /* Games */
+        /* Games quantity */
         lbl_games = new JLabel(Labels.textLabelGamesQntt,null,SwingConstants.LEFT);
-        txtf_games = new JTextField("---");
+        txtf_games = new JTextField("15");
 
         /* Buttons */
         btn_saveNewInfo = new JButton("Сохранить как новую запись");
@@ -65,12 +83,14 @@ public class UserInterface extends JFrame
         /* Заполнение формы элементами */
         mainFrame.add(lbl_date);
         mainFrame.add(txtf_date);
+        mainFrame.add(lbl_admin);
+        mainFrame.add(txtf_admin);
         mainFrame.add(lbl_federation);
         mainFrame.add(txtf_federation);
         mainFrame.add(lbl_champ);
         mainFrame.add(txtf_champ);
-        mainFrame.add(lbl_admin);
-        mainFrame.add(txtf_admin);
+        mainFrame.add(lbl_division);
+        mainFrame.add(txtf_division);
         mainFrame.add(lbl_games);
         mainFrame.add(txtf_games);
         mainFrame.add(btn_validateFormInfo);
@@ -101,7 +121,14 @@ public class UserInterface extends JFrame
                     boolean confirm = DialogueWindows.confirm();
                     if (confirm)
                     {
-                        Writer.writeToExcel(txtf_date.getText(), txtf_federation.getText(), txtf_champ.getText(), txtf_admin.getText());
+                        String guid = Maths.createGuid();
+                        Writer.writeToExcel(txtf_date.getText(),
+                                            guid,
+                                            txtf_federation.getText(),
+                                            txtf_champ.getText(),
+                                            txtf_admin.getText(),
+                                            txtf_games.getText(),
+                                            txtf_division.getText());
                     } else
                     {
                         lbl_info_status.setText(Messages.textInfoConfirmSaveCancel);
@@ -118,7 +145,6 @@ public class UserInterface extends JFrame
                     if (confirm)
                     {
                         closeMainFrame();
-                        //System.exit(1);
                     } else
                     {
                         lbl_info_status.setText(Messages.textInfoConfirmExitCancel);
