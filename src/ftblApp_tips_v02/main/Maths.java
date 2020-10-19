@@ -7,27 +7,22 @@ import java.util.UUID;
 
 public class Maths
 {
-    public static String currentDateTime()
+    public String currentDateTime()
     {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         return df.format(new Date());
     }
 
-    public static String currentDate()
+    public String currentDate()
     {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(new Date());
     }
 
-    public static String createGuid()
+    public String createGuid()
     {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
-    }
-
-    public static void privet()
-    {
-
     }
 
 }

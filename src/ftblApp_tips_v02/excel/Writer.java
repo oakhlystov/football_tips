@@ -25,9 +25,9 @@ public class Writer
     {
         //Create blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
-
+        Maths mths = new Maths();
         //Create a blank sheet
-        XSSFSheet spreadsheet = workbook.createSheet( ""+Maths.currentDateTime());
+        XSSFSheet spreadsheet = workbook.createSheet( ""+mths.currentDateTime());
 
         //Create row object
         XSSFRow row;
@@ -47,7 +47,7 @@ public class Writer
                 null,
                 null,
                 null,
-                Maths.currentDateTime() });
+                mths.currentDateTime() });
 
         newInfo.put( "3", new Object[] {
                 null,
@@ -102,7 +102,7 @@ public class Writer
 
         //Write the workbook in file system
         String filePath = "C:/ftbl/test/";
-        String fileName = "Report "+ Maths.currentDateTime()+".xlsx";
+        String fileName = "Report "+ mths.currentDateTime()+".xlsx";
         FileOutputStream out = new FileOutputStream(new File(filePath+fileName));
 
         workbook.write(out);

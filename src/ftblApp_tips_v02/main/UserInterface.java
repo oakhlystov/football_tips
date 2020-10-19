@@ -16,6 +16,8 @@ public class UserInterface extends JFrame
         new UserInterface();
     }
 
+    Maths mths = new Maths();
+
     JButton btn_validateFormInfo,
             btn_saveNewInfo,
             btn_exit;
@@ -49,7 +51,7 @@ public class UserInterface extends JFrame
         /* Элементы, которые будут отображаться на форме. Их далее нужно отдельно добавить на саму форму */
         /* Games date */
         lbl_date = new JLabel("Дата:",null,SwingConstants.LEFT);
-        txtf_date = new JTextField(Maths.currentDate());
+        txtf_date = new JTextField(mths.currentDate());
 
         /* Federation */
         lbl_federation = new JLabel("Федерация:",null,SwingConstants.LEFT);
@@ -121,7 +123,7 @@ public class UserInterface extends JFrame
                     boolean confirm = DialogueWindows.confirm();
                     if (confirm)
                     {
-                        String guid = Maths.createGuid();
+                        String guid = mths.createGuid();
                         Writer.writeToExcel(txtf_date.getText(),
                                             guid,
                                             txtf_federation.getText(),
