@@ -17,8 +17,7 @@ public class Maths
     public static String createGuid()
     {
         UUID uuid = UUID.randomUUID();
-        String guid = uuid.toString();
-        return guid;
+        return uuid.toString();
     }
 
 }
