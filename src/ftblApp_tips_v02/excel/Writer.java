@@ -2,7 +2,7 @@ package ftblApp_tips_v02.excel;
 
 import ftblApp_tips_v02.localization.Messages;
 import ftblApp_tips_v02.main.Maths;
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Cell;    //C:\Users\79057\IdeaProjects\tips_v2\poi-4.1.2
 import org.apache.poi.xssf.usermodel.*;
 
 import javax.swing.*;
@@ -14,27 +14,26 @@ import java.util.TreeMap;
 
 public class Writer
 {
-    public static void writeToExcel(String txtf_date_toWrite,
-                                    String guid,
-                                    String txtf_federation_toWrite,
-                                    String txtf_champ_toWrite,
-                                    String txtf_admin_toWrite,
-                                    String txtf_games_toWrite,
-                                    String txtf_division_toWrite)
+    public static void _writeToExcel(String txtf_date_toWrite,
+                                     String guid,
+                                     String txtf_federation_toWrite,
+                                     String txtf_champ_toWrite,
+                                     String txtf_admin_toWrite,
+                                     String txtf_games_toWrite,
+                                     String txtf_division_toWrite)
             throws Exception
     {
         //Create blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
         Maths mths = new Maths();
         //Create a blank sheet
-        XSSFSheet spreadsheet = workbook.createSheet( ""+mths.currentDateTime());
+        XSSFSheet spreadsheet = workbook.createSheet( ""+mths._currentDateTime());
 
         //Create row object
         XSSFRow row;
 
         //This data needs to be written (Object[])
         Map< String, Object[] > newInfo = new TreeMap<>();
-        //String guid = Maths.createGuid();
         newInfo.put( "1", new Object[] {
                 "Идентификатор записи:",
                 null,
@@ -47,7 +46,7 @@ public class Writer
                 null,
                 null,
                 null,
-                mths.currentDateTime() });
+                mths._currentDateTime() });
 
         newInfo.put( "3", new Object[] {
                 null,
@@ -102,7 +101,7 @@ public class Writer
 
         //Write the workbook in file system
         String filePath = "C:/ftbl/test/";
-        String fileName = "Report "+ mths.currentDateTime()+".xlsx";
+        String fileName = "Report "+ mths._currentDateTime()+".xlsx";
         FileOutputStream out = new FileOutputStream(new File(filePath+fileName));
 
         workbook.write(out);

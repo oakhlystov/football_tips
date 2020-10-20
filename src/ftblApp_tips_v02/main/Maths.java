@@ -7,19 +7,19 @@ import java.util.UUID;
 
 public class Maths
 {
-    public String currentDateTime()
+    public String _currentDateTime()
     {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         return df.format(new Date());
     }
 
-    public String currentDate()
+    public String _currentDate()
     {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(new Date());
     }
 
-    public String createGuid()
+    public String _createGuid()
     {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
